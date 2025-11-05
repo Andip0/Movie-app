@@ -5,48 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineHub - Discover Movies</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <span class="logo-icon">🎬</span>
-                <span class="logo-text">CineHub</span>
-            </div>
-            <div class="nav-links">
-                <a href="#" class="nav-link active" data-page="home">Home</a>
-                <a href="#" class="nav-link" data-page="favorites">Favorites</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Discover Your Next Favorite Movie</h1>
-            <p class="hero-subtitle">Explore thousands of movies and TV shows</p>
-            
-            <!-- Search Bar -->
-            <div class="search-container">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    class="search-input" 
-                    placeholder="Search for movies..."
-                    autocomplete="off"
-                >
-                <button class="search-btn" id="searchBtn">
+            <div class="nav-1">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <a href="#" class="logo" id="logoLink">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">CineHub</span>
+                </a>
+                <button class="mobile-search-toggle" id="mobileSearchToggle">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                 </button>
+                <div class="nav-search-container">
+                    <input type="text" id="searchInput" class="nav-search-input" placeholder="Search movies, actors, directors..." autocomplete="off">
+                    <button class="nav-search-btn" id="searchBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-
-            <!-- Filters -->
-            <div class="filters">
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="mylist">My List</a>
+            </div>
+        </div>
+        <div class="mobile-search-bar" id="mobileSearch" style="display: none;">
+            <input type="text" id="mobileSearchInput" placeholder="Search movies, actors, directors..." autocomplete="off">
+            <button id="mobileSearchGo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="filters-bar">
+            <div class="filters-container">
+                <select id="contentTypeFilter" class="filter-select">
+                    <option value="movie">Movies</option>
+                    <option value="tv">TV Shows</option>
+                    <option value="both">Both</option>
+                </select>
                 <select id="genreFilter" class="filter-select">
                     <option value="">All Genres</option>
                 </select>
@@ -57,31 +69,100 @@
                 </select>
             </div>
         </div>
+    </nav>
+
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>Menu</h2>
+                <button class="drawer-close" id="drawerClose">&times;</button>
+            </div>
+            <div class="drawer-menu">
+                <a href="#" class="drawer-item" data-drawer="home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Home
+                </a>
+                <a href="#" class="drawer-item" data-drawer="movies">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                    Movies
+                </a>
+                <a href="#" class="drawer-item" data-drawer="tv">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                    TV Shows
+                </a>
+                <a href="#" class="drawer-item" data-drawer="mylist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    My List
+                </a>
+                <a href="#" class="drawer-item" data-drawer="popular">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    Popular
+                </a>
+                <a href="#" class="drawer-item" data-drawer="genres">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Browse Genres
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero" id="hero">
+        <div class="hero-carousel" id="heroCarousel">
+            <div class="carousel-loading"><div class="loading-spinner"></div></div>
+        </div>
+        <div class="carousel-nav-container">
+            <button class="carousel-nav next" id="carouselNext">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-nav prev" id="carouselPrev">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="carousel-indicators" id="carouselIndicators"></div>
     </section>
 
-    <!-- Main Content -->
     <main class="main-content" id="mainContent">
-        <!-- Home Page -->
         <div class="page active" id="homePage">
-            <!-- Search Results (hidden initially) -->
             <section class="movie-section" id="searchResults" style="display: none;">
                 <h2 class="section-title">Search Results</h2>
                 <div class="movies-grid" id="searchGrid"></div>
             </section>
-
-            <!-- Trending Section -->
-            <section class="movie-section">
-                <h2 class="section-title">Trending Now</h2>
-                <div class="movies-grid" id="trendingGrid">
-                    <!-- Skeleton loaders -->
+            <section class="movie-section" id="recommendedSection" style="display: none;">
+                <h2 class="section-title">Recommended For You</h2>
+                <div class="movies-grid" id="recommendedGrid"></div>
+            </section>
+            <section class="movie-section" id="trendingRegionSection">
+                <h2 class="section-title">Trending in Your Region</h2>
+                <div class="movies-grid" id="trendingRegionGrid">
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
                 </div>
             </section>
-
-            <!-- Top Rated Section -->
             <section class="movie-section">
                 <h2 class="section-title">Top Rated</h2>
                 <div class="movies-grid" id="topRatedGrid">
@@ -91,8 +172,6 @@
                     <div class="skeleton-card"></div>
                 </div>
             </section>
-
-            <!-- Upcoming Section -->
             <section class="movie-section">
                 <h2 class="section-title">Coming Soon</h2>
                 <div class="movies-grid" id="upcomingGrid">
@@ -104,28 +183,37 @@
             </section>
         </div>
 
-        <!-- Favorites Page -->
-        <div class="page" id="favoritesPage">
+        <div class="page" id="mylistPage">
             <section class="movie-section">
-                <h2 class="section-title">My Favorites</h2>
-                <div class="movies-grid" id="favoritesGrid">
-                    <div class="empty-favorites">
+                <h2 class="section-title">My List</h2>
+                <div class="status-tabs">
+                    <button class="status-tab active" data-status="all">All</button>
+                    <button class="status-tab" data-status="watching">Watching</button>
+                    <button class="status-tab" data-status="plan">Plan to Watch</button>
+                    <button class="status-tab" data-status="completed">Completed</button>
+                    <button class="status-tab" data-status="dropped">Dropped</button>
+                    <button class="status-tab" data-status="favorite">Favorites</button>
+                </div>
+                <div class="movies-grid" id="myListGrid">
+                    <div class="empty-list">
                         <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
-                        <p>No favorites yet. Start adding movies you love!</p>
+                        <p>Your list is empty. Start adding movies and shows!</p>
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Movie Detail Modal -->
     <div class="modal" id="movieModal">
         <div class="modal-overlay" id="modalOverlay"></div>
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="modal-backdrop-container">
+                <img class="modal-backdrop" id="modalBackdrop" alt="">
+                <div class="modal-backdrop-overlay"></div>
+            </div>
             <div class="modal-details">
                 <div class="modal-header">
                     <h2 class="modal-title" id="modalTitle"></h2>
@@ -135,19 +223,41 @@
                         </svg>
                     </button>
                 </div>
+                <div class="watch-status-selector">
+                    <label class="status-option">
+                        <input type="radio" name="watchStatus" value="watching">
+                        <span class="status-label">Watching</span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="watchStatus" value="plan">
+                        <span class="status-label">Plan to Watch</span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="watchStatus" value="completed">
+                        <span class="status-label">Completed</span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="watchStatus" value="dropped">
+                        <span class="status-label">Dropped</span>
+                    </label>
+                    <label class="status-option">
+                        <input type="radio" name="watchStatus" value="none">
+                        <span class="status-label">Remove from List</span>
+                    </label>
+                </div>
                 <div class="modal-meta">
                     <span class="rating" id="modalRating"></span>
                     <span class="separator">•</span>
-                    <span id="modalYear"></span>
-                    <span class="separator">•</span>
                     <span id="modalRuntime"></span>
+                    <span class="separator" id="certificationSep" style="display: none;">•</span>
+                    <span class="certification-badge" id="modalCertification" style="display: none;"></span>
                 </div>
                 <div class="modal-genres" id="modalGenres"></div>
                 <p class="modal-overview" id="modalOverview"></p>
                 <div class="modal-actions">
                     <button class="trailer-btn" id="trailerBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z"/>
+                            <path d="M8 5v14l11-7z" />
                         </svg>
                         Watch Trailer
                     </button>
@@ -159,7 +269,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
