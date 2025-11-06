@@ -52,6 +52,20 @@ const modalFavoriteBtn = document.getElementById('modalFavoriteBtn');
 const trailerBtn = document.getElementById('trailerBtn');
 const watchStatusRadios = document.querySelectorAll('input[name="watchStatus"]');
 
+if (!window.storage) {
+    window.storage = {
+        get: async (key) => {
+            return { value: localStorage.getItem(key) };
+        },
+        set: async (key, value) => {
+            localStorage.setItem(key, value);
+        },
+        remove: async (key) => {
+            localStorage.removeItem(key);
+        }
+    };
+}
+
 function debounce(func, delay) {
     let timeout;
     return function (...args) {
@@ -995,3 +1009,4 @@ async function loadListItems(items) {
 
     displayMovies(detailedItems, myListGrid);
 }
+
