@@ -1152,11 +1152,6 @@ body::-webkit-scrollbar-thumb:hover {
         font-size: 0.85rem;
     }
     
-    .carousel-nav-container,
-    .carousel-indicators {
-        display: none;
-    }
-    
     /* ===== MAIN CONTENT ===== */
     .main-content {
         padding: 0;
@@ -1331,3 +1326,4 @@ body::-webkit-scrollbar-thumb:hover {
         aspect-ratio: auto;
     }
 }
+
