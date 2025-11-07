@@ -666,6 +666,35 @@ async function handleSearch() {
     try {
         const contentType = contentTypeFilter.value;
 
+        if (contentType === 'both') {
+            const [movieResponse, tvResponse] = await Promise.all([
+                fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`),
+                fetch(`${BASE_URL}/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+            ]);
+
+            const movieData = await movieResponse.json();
+            const tvData = await tvResponse.json();
+
+            const movies = movieData.results.map(item => ({ ...item, media_type: 'movie' }));
+            const tvShows = tvData.results.map(item => ({ ...item, media_type: 'tv' }));
+            const combined = [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity);
+
+            if (combined.length > 0) {
+                displayMovies(combined, searchGrid);
+                return;
+            }
+        } else {
+            const endpoint = contentType === 'movie' ? 'movie' : 'tv';
+            const response = await fetch(`${BASE_URL}/search/${endpoint}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            const results = data.results.map(item => ({ ...item, media_type: contentType }));
+            
+            if (results.length > 0) {
+                displayMovies(results, searchGrid);
+                return;
+            }
+        }
+
         const personResponse = await fetch(`${BASE_URL}/search/person?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
         const personData = await personResponse.json();
 
@@ -691,27 +720,7 @@ async function handleSearch() {
             }
         }
 
-        if (contentType === 'both') {
-            const [movieResponse, tvResponse] = await Promise.all([
-                fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`),
-                fetch(`${BASE_URL}/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
-            ]);
-
-            const movieData = await movieResponse.json();
-            const tvData = await tvResponse.json();
-
-            const movies = movieData.results.map(item => ({ ...item, media_type: 'movie' }));
-            const tvShows = tvData.results.map(item => ({ ...item, media_type: 'tv' }));
-            const combined = [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity);
-
-            displayMovies(combined, searchGrid);
-        } else {
-            const endpoint = contentType === 'movie' ? 'movie' : 'tv';
-            const response = await fetch(`${BASE_URL}/search/${endpoint}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
-            const data = await response.json();
-            const results = data.results.map(item => ({ ...item, media_type: contentType }));
-            displayMovies(results, searchGrid);
-        }
+        searchGrid.innerHTML = '<p style="color: var(--text-gray); text-align: center; grid-column: 1 / -1;">No results found.</p>';
     } catch (error) {
         console.error('Error searching:', error);
         searchGrid.innerHTML = '<p style="color: var(--text-gray); text-align: center; grid-column: 1 / -1;">Search failed.</p>';
@@ -1009,4 +1018,3 @@ async function loadListItems(items) {
 
     displayMovies(detailedItems, myListGrid);
 }
-
