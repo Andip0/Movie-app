@@ -20,7 +20,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Custom Scrollbar */
 body::-webkit-scrollbar {
     width: 12px;
 }
@@ -40,7 +39,6 @@ body::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 0 6px var(--netflix-red);
 }
 
-/* Firefox Scrollbar */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--netflix-red) var(--netflix-dark);
@@ -919,7 +917,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 #mylistPage { padding-top: 2rem; }
 
-/* Mobile Navigation Elements (Hidden on Desktop) */
 .mobile-menu-btn,
 .mobile-search-toggle,
 .mobile-search-bar,
@@ -927,10 +924,8 @@ body::-webkit-scrollbar-thumb:hover {
     display: none;
 }
 
-/* ===== MOBILE STYLES (HiAnime-inspired) ===== */
 @media (max-width: 768px) {
     
-    /* ===== NAVBAR ===== */
     .nav-container {
         padding: 0.75rem 1rem;
     }
@@ -941,7 +936,6 @@ body::-webkit-scrollbar-thumb:hover {
         align-items: center;
     }
     
-    /* Show mobile menu and search buttons */
     .mobile-menu-btn,
     .mobile-search-toggle {
         display: flex;
@@ -960,22 +954,18 @@ body::-webkit-scrollbar-thumb:hover {
         color: var(--netflix-red);
     }
     
-    /* Hide desktop search */
     .nav-search-container {
         display: none;
     }
     
-    /* Hide desktop nav links */
     .nav-links {
         display: none;
     }
     
-    /* Hide filters bar */
     .filters-bar {
         display: none;
     }
     
-    /* Mobile Search Bar */
     .mobile-search-bar {
         position: relative;
         padding: 0.75rem 1rem;
@@ -1018,7 +1008,6 @@ body::-webkit-scrollbar-thumb:hover {
         justify-content: center;
     }
     
-    /* ===== MOBILE DRAWER ===== */
     .mobile-drawer {
         display: block;
         position: fixed;
@@ -1113,7 +1102,6 @@ body::-webkit-scrollbar-thumb:hover {
         flex-shrink: 0;
     }
     
-    /* ===== HERO SECTION ===== */
     .hero {
         height: 50vh;
         min-height: 300px;
@@ -1152,7 +1140,6 @@ body::-webkit-scrollbar-thumb:hover {
         font-size: 0.85rem;
     }
     
-    /* ===== MAIN CONTENT ===== */
     .main-content {
         padding: 0;
     }
@@ -1166,7 +1153,6 @@ body::-webkit-scrollbar-thumb:hover {
         margin-bottom: 1rem;
     }
     
-    /* ===== MOVIE GRID (HiAnime Style) ===== */
     .movies-grid {
         display: flex;
         flex-direction: column;
@@ -1238,7 +1224,6 @@ body::-webkit-scrollbar-thumb:hover {
         align-self: flex-start;
     }
     
-    /* ===== MY LIST PAGE ===== */
     .status-tabs {
         top: 60px;
         padding: 0.75rem 0;
@@ -1251,7 +1236,6 @@ body::-webkit-scrollbar-thumb:hover {
         white-space: nowrap;
     }
     
-    /* ===== SEARCH RESULTS ===== */
     #searchResults {
         padding: 1.5rem 1rem;
     }
@@ -1262,7 +1246,6 @@ body::-webkit-scrollbar-thumb:hover {
         flex-direction: column;
     }
     
-    /* ===== MODAL ===== */
     .modal-content {
         max-width: 100%;
         max-height: 100vh;
@@ -1318,7 +1301,6 @@ body::-webkit-scrollbar-thumb:hover {
         font-size: 0.7rem;
     }
     
-    /* ===== SKELETON CARDS ===== */
     .skeleton-card {
         min-width: auto;
         width: 100%;
